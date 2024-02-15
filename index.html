@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RandomImage</title>
+  <style>
+    .container {
+      width: 70vw;
+      height: 70vw;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      /* border: 1px solid #000; */
+      background:  50% 50% no-repeat / auto 100%
+      /* background-image: url(./images/cat1.jpeg); */
+    }
+    .container img {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (min-width: 1280px) {
+      .container{
+        width: 700px;
+        height: 700px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/cat1.jpeg">
+  </div>
+</body>
+<script>
+  let box = document.querySelector('.container')
+  let RandomImage = document.querySelector('.container img')
+
+    let nowSrc;
+    let i = 0;
+    let toggle = true;
+      
+    function change(){
+      if(i<10) {
+        i ++;
+        RandomImage.src = `images/cat${i}.jpeg`
+        console.log(i)
+      } else if(i=10) {
+        i = 0
+      }
+      nowSrc = RandomImage.src
+      // console.log(i, nowSrc)
+    }
+
+    let pauseTiming = setInterval(change, 200)
+
+    function pause() {
+      clearInterval(pauseTiming)
+      RandomImage.src = nowSrc
+      toggle = false;
+    }
+
+    function replay() {
+
+      pauseTiming = setInterval(change, 100)
+      toggle = true;
+    }
+
+
+    box.addEventListener('mouseup', replay)
+    box.addEventListener('mousedown', pause)
+
+
+
+</script> 
+</html>
